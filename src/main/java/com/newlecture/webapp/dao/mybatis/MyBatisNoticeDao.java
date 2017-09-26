@@ -8,7 +8,7 @@ import com.newlecture.webapp.entity.NoticeView;
 public class MyBatisNoticeDao implements NoticeDao {
 
 	@Override
-	public List<NoticeView> getList(int page, String query) {
+	public List<NoticeView> getList(int page,String field, String query) {
 		// TODO Auto-generated method stub
 		return null;
 	}

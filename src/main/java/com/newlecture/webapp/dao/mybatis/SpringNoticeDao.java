@@ -1,4 +1,4 @@
-package com.newlecture.webapp.dao.mybatis;
+/*package com.newlecture.webapp.dao.mybatis;
 
 import java.util.List;
 
@@ -54,3 +54,4 @@ public class SpringNoticeDao implements NoticeDao {
 	}
 
 }
+*/
