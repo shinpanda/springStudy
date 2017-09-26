@@ -319,9 +319,35 @@ window.onload = function() {
 		
 	};
 };
+//!--노드 바꾸기 예제 -->
+window.onload = function() {
+	var swapNodeButton = document.querySelector("#swap-node-button");
+	var container = document.querySelector("#swap-node-container");	
+	
+	swapNodeButton.onclick = function() {
+		var nodes = container.getElementsByTagName("img");
+		
+		var node1 = nodes[0];
+		var node2 = nodes[1];
+		var node3 = nodes[2];
+		
+		/* var node1 = container.firstElementChild;
+		var node3 = container.lastElementChild; */
+		//var oldNode = container.replaceChild(node1, node3);
+		//container.insertBefore(node3, container.firstChild);
+		var oldNode = container.replaceChild(node2, node3);
+		container.insertBefore(node3, container.firstElementChild);
+	};
+};
 </script>
 </head>
 <body>
+	<!--노드 바꾸기 예제 -->
+	<input id="swap-node-button" type="button" value="노드 바꾸기" />
+	<div id="swap-node-container">
+		<img src="../images/answeris.png" /><img src="../images/w3c.png" /><img src="../images/microsoft.png" />
+	</div>
+	<hr/>
 	<!--텍스트 노드 추가 예제 -->
 	<input id="add-text-node-button" type="button" value="텍스트노드 추가" />
 	<input id="add-img-node-button" type="button" value="이미지노드 추가" />
@@ -340,7 +366,7 @@ window.onload = function() {
 	<input type="text" id="img-src" />
 	<input id="ch-img-button" type="button" value="이미지 변경" />
 	<div id="img-container">
-		<img src="http://t1.daumcdn.net/thumb/R1024x0/?fname=http://cfile1.uf.tistory.com/image/2134514F579B4C7D165741" />
+		<img src="http://i.huffpost.com/gen/5524070/thumbs/o-THE-570.jpg?3" />
 	</div>
 
 	<!-- Selector API 예제 -->
