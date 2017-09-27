@@ -23,22 +23,22 @@ import com.newlecture.webapp.entity.NoticeView;
 public class CustomerController {
 	
 	@Autowired
-	private SqlSessionTemplate sqlSession;
+	private NoticeDao noticeDao;
 
 	@RequestMapping("notice")
 	public String notice(@RequestParam(value="p", defaultValue="1") Integer page, 
 			@RequestParam(value="f", defaultValue="title") String field,
 			@RequestParam(value="q", defaultValue="") String query,
 			Model model) {
-		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
-		List<NoticeView> list = noticeDao.getList(page, field, query);
 		
-		model.addAttribute("list", list);
+		
+		model.addAttribute("list", noticeDao.getList(page, field, query));
 		
 		/*String output = String.format("p:%s, q:%s", page, query);
 		output += String.format("title : %s\n", list.get(0).getTitle());
 		*/
-		return "customer/notice";
+		//return "customer/notice";
+		return "customer.notice";
 	}
 	
 	/*@RequestMapping("notice/{id}")
@@ -48,11 +48,10 @@ public class CustomerController {
 	}
 	*/
 	@RequestMapping("notice/{id}")
-	@ResponseBody
 	public String noticeDetail(@PathVariable("id") String aaaid) {
 		//NoticeDao noticeDao = new SpringNoticeDao();
-		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
-		NoticeView noticeView = noticeDao.get(aaaid);
-		return aaaid+"번째 공지사항 : "+noticeView.getTitle();
+		
+		//return aaaid+"번째 공지사항 : "+noticeView.getTitle();
+		return "customer.notice-detail";
 	}
 }

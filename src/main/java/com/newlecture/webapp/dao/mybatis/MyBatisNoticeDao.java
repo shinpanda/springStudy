@@ -2,15 +2,22 @@ package com.newlecture.webapp.dao.mybatis;
 
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.newlecture.webapp.dao.NoticeDao;
 import com.newlecture.webapp.entity.NoticeView;
 
 public class MyBatisNoticeDao implements NoticeDao {
-
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
 	@Override
 	public List<NoticeView> getList(int page,String field, String query) {
-		// TODO Auto-generated method stub
-		return null;
+		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class); //매퍼 객체
+		List<NoticeView> list = noticeDao.getList(page, field, query); // xml에 구현된 getList 메소드를 가져오는 것.
+		return list;
 	}
 
 	@Override
@@ -21,8 +28,9 @@ public class MyBatisNoticeDao implements NoticeDao {
 
 	@Override
 	public NoticeView get(String no) {
-		// TODO Auto-generated method stub
-		return null;
+		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
+		NoticeView noticeView = noticeDao.get(no);
+		return noticeView;
 	}
 
 	@Override
