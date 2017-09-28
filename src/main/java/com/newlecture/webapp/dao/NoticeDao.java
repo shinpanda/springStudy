@@ -15,4 +15,6 @@ public interface NoticeDao {
 	NoticeView get(String id);
 	int update(String id, String title, String content, String fileName);
 	int insert(String title, String content, String fileName);
+	NoticeView getPrev(String id);
+	NoticeView getNext(String id);
 }

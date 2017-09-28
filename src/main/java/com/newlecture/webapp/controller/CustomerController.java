@@ -38,7 +38,7 @@ public class CustomerController {
 		output += String.format("title : %s\n", list.get(0).getTitle());
 		*/
 		//return "customer/notice";
-		return "customer.notice";
+		return "customer.notice.list";
 	}
 	
 	/*@RequestMapping("notice/{id}")
@@ -48,10 +48,16 @@ public class CustomerController {
 	}
 	*/
 	@RequestMapping("notice/{id}")
-	public String noticeDetail(@PathVariable("id") String aaaid) {
+	public String noticeDetail(@PathVariable("id") String id,Model model) {
 		//NoticeDao noticeDao = new SpringNoticeDao();
 		
 		//return aaaid+"번째 공지사항 : "+noticeView.getTitle();
-		return "customer.notice-detail";
+		
+		model.addAttribute("n", noticeDao.get(id));
+		model.addAttribute("prev", noticeDao.getPrev(id));
+		model.addAttribute("next", noticeDao.getNext(id));
+		
+		
+		return "customer.notice.detail";
 	}
 }

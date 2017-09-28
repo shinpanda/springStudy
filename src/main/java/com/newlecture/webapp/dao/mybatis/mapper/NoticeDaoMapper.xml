@@ -11,4 +11,12 @@
 	<select id="getList" resultType="com.newlecture.webapp.entity.NoticeView">
 		SELECT * FROM NoticeView where ${param2} like '%${param3}%' order by regDate DESC limit ${(param1-1)*10}, 10
 	</select>
+	
+	<select id="getPrev" resultType="com.newlecture.webapp.entity.NoticeView">       
+		<![CDATA[SELECT * FROM NoticeView where cast(id as unsigned) < cast(#{id} as unsigned) order by regDate DESC limit 1]]>
+	</select>
+	
+	<select id="getNext" resultType="com.newlecture.webapp.entity.NoticeView">       
+		<![CDATA[SELECT * FROM NoticeView where cast(id as unsigned) > cast(#{id} as unsigned) order by regDate ASC limit 1]]>
+	</select>
 </mapper>
