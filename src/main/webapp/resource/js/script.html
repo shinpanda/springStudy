@@ -334,7 +334,7 @@ window.addEventListener("load", function() {
 		var node1 = container.firstElementChild;
 		var node3 = container.lastElementChild;
 		var oldNode = container.replaceChild(node1, node3);
-		container.insertBefore(node3, container.firstChild);
+		container.insertBefore(node3, container.firstElementChild);
 		/* var oldNode = container.replaceChild(node2, node3);
 		container.insertBefore(node3, container.firstElementChild); */
 
@@ -362,46 +362,118 @@ window.addEventListener("load", function() {
 	} */
 	td.addEventListener("click", function(e) {
 		//alert("td");
-		console.log("td");
+		//console.log("td");
 		e.target.style.background = "green";
 		//e.stopPropagation();
 	});
-	 
+	var checkedId = 0;
 	
 	tbody.addEventListener("click", function(e) {
+		if(e.target.type=="radio")
+			checkedId = e.target.value;	
+		alert(checkedId);
 		//alert("tbody");
-		console.log("tbody");
-		e.target.style.background = "pink";
+		/* console.log("tbody");
+		e.target.style.background = "pink"; */
 		//e.target.parentNode.style.background = "pink";
 		//e.currentTarget
 	}, false);
 	
 	moveUpNodeButton.onclick = function() {
-		
+		/* var radioCheck = document.getElementsByName("id");
+		for(var i in radioCheck){
+			if(radioCheck[i].checked == true)
+			{
+				var node1 = radioCheck[i].parentNode.parentElement;
+				if(i-1>=0){
+					var node2 = radioCheck[i-1].parentNode.parentElement;
+					var oldNode = tbody.replaceChild(node2, node1);
+					tbody.insertBefore(node1, node2);
+				}else {
+					tbody.appendChild(node1);
+				}
+				break;
+			}
+		} */
+			
 	};
 });
 
+window.addEventListener("load", function() {
+	//var titleText = document.querySelector('form > input[type="text"]');
+	var titleText = document.querySelector('form > input[name]');
+	var submitButton = document.querySelector('form > input[type="submit"]');
+	var cancelButton = document.querySelector('form > a');
+	
+	submitButton.onclick = function(e){
+		if(titleText.value == ""){
+			alert("제목을 입력하세요.");
+			e.preventDefault();
+		}
+	}
+	cancelButton.onclick = function(e){
+		if(titleText.value !=""){
+			/* var cancel =confirm("작성중이던 입력을 취소하시겠습니까?");
+			if(cancel == true)
+				history.back(-1);
+			else
+				e.preventDefault();	 */
+			if(!confirm("작성중이던 입력을 취소하시겠습니까?"))
+				e.preventDefault();
+		}
+	}
+});
 </script>
 </head>
 <body>
-	<!--노드 바꾸기2 예제 -->
+	<!--기본 행위 막기 예제 -->
+	<form>
+		<input type="text" name="title"/><br />
+		<input type="submit" value="전송" /><br />
+		<a href="">취소</a>
+	</form>
+
+	<!--노드 바꾸기2 + 이벤트 심화 : 버블링과 캡처링 예제 -->
 	<input id="move-up-node-button" type="button" value="위로 옮기기" />
 	<div id="move-up-node-container">
 		<table border="1">
 			<thead>
 				<tr>
+					<td></td>
 					<td>코드</td>
 					<td>제목</td>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
+					<td><input type="radio" name ="id" value="1" /></td>
 					<td>1</td>
 					<td>zzz</td>
 				</tr>
 				<tr>
+					<td><input type="radio" name ="id" value="2" /></td>
 					<td>2</td>
 					<td>sdd</td>
+				</tr>
+				<tr>
+					<td><input type="radio" name ="id" value="3" /></td>
+					<td>3</td>
+					<td>zwerzz</td>
+				</tr>
+				<tr>
+					<td><input type="radio" name ="id" value="4" /></td>
+					<td>4</td>
+					<td>sdefd</td>
+				</tr>
+				<tr>
+					<td><input type="radio" name ="id" value="5" /></td>
+					<td>5</td>
+					<td>zaazz</td>
+				</tr>
+				<tr>
+					<td><input type="radio" name ="id" value="6" /></td>
+					<td>6</td>
+					<td>sdqwerd</td>
 				</tr>
 			</tbody>
 		</table>

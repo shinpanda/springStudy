@@ -13,10 +13,14 @@
 	</select>
 	
 	<select id="getPrev" resultType="com.newlecture.webapp.entity.NoticeView">       
-		<![CDATA[SELECT * FROM NoticeView where cast(id as unsigned) < cast(#{id} as unsigned) order by regDate DESC limit 1]]>
+		<!-- <![CDATA[SELECT * FROM NoticeView where cast(id as unsigned) < cast(#{id} as unsigned) order by regDate DESC limit 1]]> -->
+		SELECT * FROM NoticeView where id &lt; cast(#{id} as unsigned) order by regDate DESC limit 1
 	</select>
 	
 	<select id="getNext" resultType="com.newlecture.webapp.entity.NoticeView">       
-		<![CDATA[SELECT * FROM NoticeView where cast(id as unsigned) > cast(#{id} as unsigned) order by regDate ASC limit 1]]>
+		<!-- <![CDATA[SELECT * FROM NoticeView where cast(id as unsigned) > cast(#{id} as unsigned) order by regDate ASC limit 1]]> -->
+		SELECT * FROM NoticeView where id &gt; cast(#{id} as unsigned) order by regDate ASC limit 1
 	</select>
+	
+	
 </mapper>
