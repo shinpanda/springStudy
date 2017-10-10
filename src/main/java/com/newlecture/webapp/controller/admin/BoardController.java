@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.newlecture.webapp.dao.NoticeDao;
+import com.newlecture.webapp.entity.Notice;
 
 @Controller
 @RequestMapping("/admin/board/*")
@@ -49,10 +50,18 @@ public class BoardController {
 	
 	@RequestMapping(value="notice/reg", method=RequestMethod.POST)
 	public String noticeReg(@RequestParam(defaultValue="") String title,
-			@RequestParam(defaultValue="") String content, @RequestParam(defaultValue="") String fileName ) throws UnsupportedEncodingException {
-		title = new String(title.getBytes("ISO-8859-1"), "UTF-8");
-		//noticeDao.insert(title, content, fileName);
-		System.out.println(title);
+			@RequestParam(defaultValue="") String content) throws UnsupportedEncodingException {
+		//title = new String(title.getBytes("ISO-8859-1"), "UTF-8"); -> 필터에서 처리
+		int row = 0;
+		String writerId = "newlec";
+		
+		row = noticeDao.insert(title, content, writerId);
+		//row = noticeDao.insert(new Notice(title, content, writerId));
+		
+		// System.out.println(row); -> 1
+		
 		return "redirect: ../notice";
 	}
+	
+	
 }

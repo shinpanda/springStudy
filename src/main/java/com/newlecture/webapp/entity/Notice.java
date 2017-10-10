@@ -14,7 +14,11 @@ public class Notice {
 	public Notice() {
 		// TODO Auto-generated constructor stub
 	}
-
+	public Notice(String title, String content, String writerId) {
+		this.title = title;
+		this.content = content;
+		this.writerId = writerId;
+	}
 	public Notice(String id, String title, String content, String writerId, Date regDate, int hit, String fileName) {
 		super();
 		this.id = id;

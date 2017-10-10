@@ -47,7 +47,7 @@
 					<%-- <c:forEach var="f" items="${files}"
 									varStatus="s">
 									<img src="upload/${f.src}" /> 
-								</c:forEach> --%>${n.content}<br />adf <br />dddd
+								</c:forEach> --%>${n.content}
 				</td>
 			</tr>
 		</tbody>

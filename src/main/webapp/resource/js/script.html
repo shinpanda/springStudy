@@ -347,6 +347,7 @@ window.addEventListener("load", function() {
 	var tbody = container.querySelector("tbody");
 //	var td = tbody.querySelector("tr:first-child td:last-child");
 	var td = tbody.firstElementChild.lastElementChild;
+	var tr = null;
 	/* var trs = container.querySelectorAll("tbody tr");
 	
 	for(var i in trs){
@@ -369,9 +370,28 @@ window.addEventListener("load", function() {
 	var checkedId = 0;
 	
 	tbody.addEventListener("click", function(e) {
-		if(e.target.type=="radio")
-			checkedId = e.target.value;	
-		alert(checkedId);
+		/* if(e.target.type=="radio"){
+			var tr = e.target.parentNode.parentElement;
+			tr.style.background = "pink";
+			/* alert("라디오 버튼 클릭");
+			checkedId = e.target.value;
+		} */
+		 if(e.target.nodeName=="INPUT"){
+			 tr = e.target.parentNode.parentElement;
+	/* 		 var tr = e.target.parentNode.parentElement;
+			 var bf = tr.previousElementSibling;
+			 var af = tr.nextElementSibling;
+	
+			 var oldNode = tbody.replaceChild(tr, bf);
+			 tbody.insertBefore(bf, af); */
+			/*  
+			 var tr1 = e.target.parentNode.parentElement;
+			 var tr2 = tr1.previousElementSibling;
+			var oldNode = tbody.replaceChild(tr2, tr1);			
+			 tbody.insertBefore(tr1, tr2); */
+			 
+		}
+		//alert(checkedId);
 		//alert("tbody");
 		/* console.log("tbody");
 		e.target.style.background = "pink"; */
@@ -380,6 +400,25 @@ window.addEventListener("load", function() {
 	}, false);
 	
 	moveUpNodeButton.onclick = function() {
+		if (tr == null)
+			return;
+		
+		var bf = tr.previousElementSibling;
+		var af = tr.nextElementSibling;
+	 	// -> bf, af 예외처리.
+		if(bf == null){
+			tbody.appendChild(tr);
+		} else if (af == null){
+// 			/* var oldNode = tbody.replaceChild(bf, tr);
+// 	 		tbody.insertBefore(tr, bf); */
+			var oldNode = tbody.replaceChild(tr, bf);
+	 		tbody.appendChild(bf);
+		} else{
+			var oldNode = tbody.replaceChild(tr, bf);
+	 		tbody.insertBefore(bf, af);
+		}
+		
+		
 		/* var radioCheck = document.getElementsByName("id");
 		for(var i in radioCheck){
 			if(radioCheck[i].checked == true)

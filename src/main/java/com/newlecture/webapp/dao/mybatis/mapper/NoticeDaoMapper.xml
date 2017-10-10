@@ -22,5 +22,13 @@
 		SELECT * FROM NoticeView where id &gt; cast(#{id} as unsigned) order by regDate ASC limit 1
 	</select>
 	
+	<insert id="insert" parameterType="com.newlecture.webapp.entity.Notice">
+		<selectKey order="BEFORE" keyProperty="id" resultType="String" >
+			select IFNULL(max(cast(id as unsigned)), 0)+1 from Notice
+		</selectKey>
+		insert into Notice(id, title, content, writerId)
+		values (#{id}, #{title}, #{content}, #{writerId})
+	</insert>
+	
 	
 </mapper>

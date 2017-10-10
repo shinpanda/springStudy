@@ -15,10 +15,10 @@ public class CharaterEncodingFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		System.out.println("hello filter~");
-		
+		request.setCharacterEncoding("UTF-8");
 		chain.doFilter(request, response);
-		
-		System.out.println("bye filter~");
+		/*
+		System.out.println("bye filter~");*/
 		
 	}
 
