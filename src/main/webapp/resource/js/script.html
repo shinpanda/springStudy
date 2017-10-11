@@ -131,7 +131,7 @@
             var x;
             var y;
             
-            x=parseInt(x1.value);
+            x=(x1.value);
             y=parseInt(y1.value);
          
             result.value=x+y;
@@ -462,14 +462,106 @@ window.addEventListener("load", function() {
 		}
 	}
 });
+<!-- 노드복제 예제 -->
+window.addEventListener("load", function() {
+	//var titleText = document.querySelector('form > input[type="text"]');
+	var cloneButton = document.querySelector('#ex-clone input[value="단순복제"]');
+	var tbody = document.querySelector('#ex-clone tbody');
+	
+	cloneButton.onclick = function(e){
+		var tr = tbody.querySelector("tr");
+		var clone = tr.cloneNode(true);
+		
+		tbody.appendChild(clone);
+		
+	}
+});
+
+<!-- Template 태그를 이용한 노드복제 예제 -->
+window.addEventListener("load", function() {
+	//var titleText = document.querySelector('form > input[type="text"]');
+	var cloneButton = document.querySelector('#ex2-clone input[value="단순복제"]');
+	var tbody = document.querySelector('#ex2-clone tbody');
+	var template = document.querySelector('#ex2-clone template');
+	
+	cloneButton.onclick = function(e){
+		
+		if('content' in template){
+			alert(aa);
+		}
+		
+		/* 
+		var obj = {kor:30, eng:40, math:50};
+		
+		obj.com = 60;
+		
+		if("com" in obj)
+				laert(obj.kor + obj.com);
+		*/
+	}
+});
 </script>
 </head>
 <body>
+
+	<!-- Template 태그를 이용한 노드복제 예제 -->
+	<div id="ex2-clone">
+		<div>
+			<input type="button" value="단순복제" />
+		</div>
+		<div id="clone-container">
+			<table border="1">
+				<thead>
+					<tr>
+						<td></td>
+						<td>코드</td>
+						<td>제목</td>
+					</tr>
+				</thead>
+				<tbody>
+					<template>
+					<tr>
+						<td><input type="radio" name="id" value="1" /></td>
+						<td>1</td>
+						<td>zzz</td>
+					</tr>
+					</template>
+				</tbody>
+			</table>
+
+
+		</div>
+	</div>
+	<hr />
+	<!-- 노드복제 예제 -->
+	<div id="ex-clone">
+		<div>
+			<input type="button" value="단순복제" />
+		</div>
+		<div id="clone-container">
+			<table border="1">
+				<thead>
+					<tr>
+						<td></td>
+						<td>코드</td>
+						<td>제목</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input type="radio" name="id" value="1" /></td>
+						<td>1</td>
+						<td>zzz</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<hr />
 	<!--기본 행위 막기 예제 -->
 	<form>
-		<input type="text" name="title"/><br />
-		<input type="submit" value="전송" /><br />
-		<a href="">취소</a>
+		<input type="text" name="title" /><br /> <input type="submit"
+			value="전송" /><br /> <a href="">취소</a>
 	</form>
 
 	<!--노드 바꾸기2 + 이벤트 심화 : 버블링과 캡처링 예제 -->
@@ -485,61 +577,60 @@ window.addEventListener("load", function() {
 			</thead>
 			<tbody>
 				<tr>
-					<td><input type="radio" name ="id" value="1" /></td>
+					<td><input type="radio" name="id" value="1" /></td>
 					<td>1</td>
 					<td>zzz</td>
 				</tr>
 				<tr>
-					<td><input type="radio" name ="id" value="2" /></td>
+					<td><input type="radio" name="id" value="2" /></td>
 					<td>2</td>
 					<td>sdd</td>
 				</tr>
 				<tr>
-					<td><input type="radio" name ="id" value="3" /></td>
+					<td><input type="radio" name="id" value="3" /></td>
 					<td>3</td>
 					<td>zwerzz</td>
 				</tr>
 				<tr>
-					<td><input type="radio" name ="id" value="4" /></td>
+					<td><input type="radio" name="id" value="4" /></td>
 					<td>4</td>
 					<td>sdefd</td>
 				</tr>
 				<tr>
-					<td><input type="radio" name ="id" value="5" /></td>
+					<td><input type="radio" name="id" value="5" /></td>
 					<td>5</td>
 					<td>zaazz</td>
 				</tr>
 				<tr>
-					<td><input type="radio" name ="id" value="6" /></td>
+					<td><input type="radio" name="id" value="6" /></td>
 					<td>6</td>
 					<td>sdqwerd</td>
 				</tr>
 			</tbody>
 		</table>
-	
-		<img src="../images/answeris.png" /><img src="../images/w3c.png" /><img src="../images/microsoft.png" />
+
+		<img src="../images/answeris.png" /><img src="../images/w3c.png" /><img
+			src="../images/microsoft.png" />
 	</div>
-	<hr/>
+	<hr />
 	<!--노드 바꾸기 예제 -->
 	<input id="swap-node-button" type="button" value="노드 바꾸기" />
 	<div id="swap-node-container">
-		<img src="../images/answeris.png" /><img src="../images/w3c.png" /><img src="../images/microsoft.png" />
+		<img src="../images/answeris.png" /><img src="../images/w3c.png" /><img
+			src="../images/microsoft.png" />
 	</div>
-	<hr/>
+	<hr />
 	<!--텍스트 노드 추가 예제 -->
 	<input id="add-text-node-button" type="button" value="텍스트노드 추가" />
 	<input id="add-img-node-button" type="button" value="이미지노드 추가" />
 	<input id="remove-node-button" type="button" value="노드 삭제" />
-	<div id="node-container">
-	</div>
-	<hr/>
+	<div id="node-container"></div>
+	<hr />
 
 	<!--자식노드변경예제 -->
 	<input id="ch-node-button" type="button" value="자식노드 변경" />
-	<div id="ch-node-container">
-		hello
-	</div>
-	<hr/>
+	<div id="ch-node-container">hello</div>
+	<hr />
 	<!--속성변경예제 -->
 	<input type="text" id="img-src" />
 	<input id="ch-img-button" type="button" value="이미지 변경" />
@@ -570,14 +661,14 @@ window.addEventListener("load", function() {
 	<hr />
 	<div>
 		<input id="nav-button" type="button" value="페이지 전환" />
-		<iframe src="notice.html" style="width:500px; height:300px;"></iframe>
+		<iframe src="notice.html" style="width: 500px; height: 300px;"></iframe>
 	</div>
 	<hr />
 	<!--  open a window 예제 -->
 	<div>
 		<input type="button" value="새창띄우기" id="open-button" /> <input
-			type="button" value="왼쪽으로 이동" id="mov-button" /><input
-			type="button" value="페이지 이동" id="trans-button" />
+			type="button" value="왼쪽으로 이동" id="mov-button" /><input type="button"
+			value="페이지 이동" id="trans-button" />
 	</div>
 
 	<hr />
