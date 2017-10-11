@@ -30,5 +30,7 @@
 		values (#{id}, #{title}, #{content}, #{writerId})
 	</insert>
 	
-	
+	<select id="getNextId" resultType="String">
+		select IFNULL(max(cast(id as unsigned)), 0)+1 from Notice
+	</select>
 </mapper>
