@@ -9,16 +9,12 @@ public class NoticeFile {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-	
-
 	public NoticeFile(String id, String src, String noticeId) {
 		super();
 		this.id = id;
 		this.src = src;
 		this.noticeId = noticeId;
 	}
-
 
 	public String getId() {
 		return id;

@@ -483,11 +483,67 @@ window.addEventListener("load", function() {
 	var cloneButton = document.querySelector('#ex2-clone input[value="단순복제"]');
 	var tbody = document.querySelector('#ex2-clone tbody');
 	var template = document.querySelector('#ex2-clone template');
+	var data = [
+		{id:"1", title:"test", writerId:"ttt"},
+		{id:"2", title:"test222", writerId:"ttt"},
+		{id:"3", title:"test333", writerId:"ttt"}
+		];
 	
 	cloneButton.onclick = function(e){
 		
 		if('content' in template){
-			alert(aa);
+			//1.template의 content에 값을 설정하고 노드를 복제
+			/* // template 의 content에 값을 설정
+			var tds = template.content.querySelectorAll("td");
+			//tes[0].appendChild(document.createTextNode("1"));
+			tds[0].textContent  = "1";
+			tds[1].textContent  = "test title";
+			tds[2].textContent  = "newlec";
+			
+			 */
+			 
+			 /*
+			 //값이 설정된 content를 복제
+			var clone = document.importNode(template.content, true);
+			 
+			//2. 복제를 한 후에 content를 설정하는 경우
+			var tds = clone.querySelectorAll("td");
+			tds[0].appendChild(document.createTextNode("1"));
+			tds[1].textContent  = "test title";
+			tds[2].textContent  = "newlec";
+			
+			// 복제된 tr을 노드 트리에 추가
+			tbody.appendChild(clone);
+			 */
+			 
+			 
+			/* for(var i in data){
+				//값이 설정된 content를 복제
+				var clone = document.importNode(template.content, true);
+				 
+				//2. 복제를 한 후에 content를 설정하는 경우
+				var tds = clone.querySelectorAll("td");
+				tds[0].appendChild(document.createTextNode(data[i].id));
+				tds[1].textContent  = data[i].title;
+				tds[2].textContent  = data[i].writerId;
+				
+				// 복제된 tr을 노드 트리에 추가
+				tbody.appendChild(clone);
+			}
+			  */
+			for(var i=0; i<data.length; i++){
+				//값이 설정된 content를 복제
+				var clone = document.importNode(template.content, true);
+				 
+				//2. 복제를 한 후에 content를 설정하는 경우
+				var tds = clone.querySelectorAll("td");
+				tds[0].appendChild(document.createTextNode(data[i].id));
+				tds[1].textContent  = data[i].title;
+				tds[2].textContent  = data[i].writerId;
+				
+				// 복제된 tr을 노드 트리에 추가
+				tbody.appendChild(clone);
+			}
 		}
 		
 		/* 
@@ -521,9 +577,9 @@ window.addEventListener("load", function() {
 				<tbody>
 					<template>
 					<tr>
-						<td><input type="radio" name="id" value="1" /></td>
-						<td>1</td>
-						<td>zzz</td>
+						<td></td>
+						<td></td>
+						<td></td>
 					</tr>
 					</template>
 				</tbody>
