@@ -75,48 +75,6 @@ public class BoardController {
 
 		String nextId = noticeDao.getNextId();
 		//System.out.println("NextId: "+ nextId);
-		
-		// 날짜 얻는 방법1
-		Date curDate = new Date();
-		//curDate.getYear()
-
-		// 날짜 얻는 방법2
-		Calendar cal = Calendar.getInstance();
-		int year = cal.get(Calendar.YEAR);
-		
-
-		/*// 날짜 얻는 방법3
-		SimpleDateFormat fmt = new SimpleDateFormat("YYYY");
-		String year2 = fmt.format(curDate);*/
-
-		
-		ServletContext ctx = request.getServletContext();
-		String path = ctx.getRealPath(String.format("/resource/customer/notice/%d/%s", year, nextId));
-		System.out.println(path);
-		File f = new File(path); // 폴더
-		
-		if(!f.exists()) {
-			if(!f.mkdirs()) // true, false 반환
-				System.out.println("디렉토리를 생성할 수 없습니다.");
-		}
-		
-		String fileName= file.getOriginalFilename();
-		//File f2 = new File(path, file.getOriginalFilename());
-		path += File.separator+fileName;
-		File f2 = new File(path);
-		InputStream fis = file.getInputStream();
-		OutputStream fos = new FileOutputStream(f2);
-		
-		byte[] buf = new byte[1024];
-		
-		int size = 0;
-		
-		while((size = fis.read(buf))>0)
-			fos.write(buf, 0, size);
-		
-		fis.close();
-		fos.close();
-		
 		int row = 0;
 		// String writerId = "newlec";
 		notice.setWriterId("newlec");
@@ -124,9 +82,52 @@ public class BoardController {
 		// row = noticeDao.insert(title, content, writerId);
 		// row = noticeDao.insert(new Notice(title, content, writerId));
 		row = noticeDao.insert(notice);
+				
 		
-		int row2 = noticeFileDao.insert(new NoticeFile(null, fileName, nextId));
-		System.out.println(row2);
+		if(!file.isEmpty()) {
+			// 날짜 얻는 방법1
+			Date curDate = new Date();
+			//curDate.getYear()
+	
+			// 날짜 얻는 방법2
+			Calendar cal = Calendar.getInstance();
+			int year = cal.get(Calendar.YEAR);
+			
+	
+			/*// 날짜 얻는 방법3
+			SimpleDateFormat fmt = new SimpleDateFormat("YYYY");
+			String year2 = fmt.format(curDate);*/
+			
+			
+			ServletContext ctx = request.getServletContext();
+			String path = ctx.getRealPath(String.format("/resource/customer/notice/%d/%s", year, nextId));
+			System.out.println(path);
+			File f = new File(path); // 폴더
+			
+			if(!f.exists()) {
+				if(!f.mkdirs()) // true, false 반환
+					System.out.println("디렉토리를 생성할 수 없습니다.");
+			}
+			
+			String fileName= file.getOriginalFilename();
+			//File f2 = new File(path, file.getOriginalFilename());
+			path += File.separator+fileName;
+			File f2 = new File(path);
+			InputStream fis = file.getInputStream();
+			OutputStream fos = new FileOutputStream(f2);
+			
+			byte[] buf = new byte[1024];
+			
+			int size = 0;
+			
+			while((size = fis.read(buf))>0)
+				fos.write(buf, 0, size);
+			
+			fis.close();
+			fos.close();
+			int row2 = noticeFileDao.insert(new NoticeFile(null, fileName, nextId));
+		}
+		
 		// System.out.println(row); -> 1
 
 		return "redirect: ../notice";
