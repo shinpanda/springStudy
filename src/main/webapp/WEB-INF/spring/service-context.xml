@@ -23,6 +23,7 @@
 	
 	<!-- DAO 객체들 -->
 	<bean class="com.newlecture.webapp.dao.mybatis.MyBatisNoticeDao"/>
+	<bean class="com.newlecture.webapp.dao.mybatis.MyBatisNoticeFileDao"/>
 	
 	<context:annotation-config />
 </beans>
