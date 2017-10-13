@@ -12,7 +12,7 @@ public class Program {
 		
 		// Proxy를 생성해서 실제 주업무 로직을 위임.
 		Calculator cal = (Calculator) Proxy.newProxyInstance(NewlecCalculator.class.getClassLoader(), new Class[] { Calculator.class}, new InvocationHandler() {
-			
+			// 프록시 인스턴스에서 메서드 호출을 처리하고 결과를 반환.
 			@Override
 			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
