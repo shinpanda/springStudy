@@ -483,11 +483,19 @@ window.addEventListener("load", function() {
 	var cloneButton = document.querySelector('#ex2-clone input[value="단순복제"]');
 	var tbody = document.querySelector('#ex2-clone tbody');
 	var template = document.querySelector('#ex2-clone template');
+	var ajaxButton = document.querySelector('#ex2-clone input[value="AJAX요청"]');
 	var data = [
 		{id:"1", title:"test", writerId:"ttt"},
 		{id:"2", title:"test222", writerId:"ttt"},
 		{id:"3", title:"test333", writerId:"ttt"}
 		];
+	
+	
+	
+	ajaxButton.onclick = function(e) {
+		var xhr = new XmlHttpRequest();
+		
+	}
 	
 	cloneButton.onclick = function(e){
 		
@@ -564,6 +572,7 @@ window.addEventListener("load", function() {
 	<div id="ex2-clone">
 		<div>
 			<input type="button" value="단순복제" />
+			<input type="button" value="AJAX요청" />
 		</div>
 		<div id="clone-container">
 			<table border="1">
