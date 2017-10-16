@@ -65,7 +65,7 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "notice/reg", method = RequestMethod.POST)
-	public String noticeReg(Notice notice, String aa, MultipartFile file,
+	public String noticeReg(Notice notice, String aa, MultipartFile[] file/*MultipartFile file*/, 
 			HttpServletRequest request/*
 										 * @RequestParam(defaultValue="") String title,
 										 * 
@@ -84,7 +84,10 @@ public class BoardController {
 		row = noticeDao.insert(notice);
 				
 		
-		if(!file.isEmpty()) {
+		//if(!file.isEmpty()) {
+		for(MultipartFile ff : file) {
+		//System.out.println(file.length);
+		//for(int i=0; i<file.length; i++) {
 			// 날짜 얻는 방법1
 			Date curDate = new Date();
 			//curDate.getYear()
@@ -109,11 +112,13 @@ public class BoardController {
 					System.out.println("디렉토리를 생성할 수 없습니다.");
 			}
 			
-			String fileName= file.getOriginalFilename();
+			//String fileName= file[i].getOriginalFilename();
+			String fileName= ff.getOriginalFilename();
 			//File f2 = new File(path, file.getOriginalFilename());
 			path += File.separator+fileName;
 			File f2 = new File(path);
-			InputStream fis = file.getInputStream();
+			//InputStream fis = file[i].getInputStream();
+			InputStream fis = ff.getInputStream();
 			OutputStream fos = new FileOutputStream(f2);
 			
 			byte[] buf = new byte[1024];

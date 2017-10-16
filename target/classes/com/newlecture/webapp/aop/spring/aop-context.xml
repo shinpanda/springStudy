@@ -9,14 +9,33 @@
 	
 	<!-- handler -->
 	<bean id="handler" class="com.newlecture.webapp.aop.spring.LogHandler" />
+	<bean id="before" class="com.newlecture.webapp.aop.spring.BeforeHandler" />
+	<bean id="after" class="com.newlecture.webapp.aop.spring.AfterHandler" />
+	<bean id="throwing" class="com.newlecture.webapp.aop.spring.ThrowingHandler" />
+	
+	<!-- Pointcuts -->
+	<bean id="methodNamePointcut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+		<property name="mappedName" value="add" />
+	</bean>
+
+	
+	<!-- Adviser -->
+	<bean id="methodNameAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="pointcut" ref="methodNamePointcut" />
+		<property name="advice" ref="before" />
+	</bean>
 	
 	
 	<!-- proxy -->
-	<bean class="org.springframework.aop.framework.ProxyFactoryBean">
+	<bean id ="cal" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="target" ref="target" />
 		<property name="interceptorNames" >
 			<list>
-				<value>handler</value>
+				<value>methodNameAdvisor</value>
+				<!-- <value>handler</value>
+				<value>before</value>
+				<value>after</value>
+				<value>throwing</value> -->
 			</list>
 		</property>
 		

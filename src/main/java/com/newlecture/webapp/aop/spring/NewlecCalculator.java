@@ -23,7 +23,13 @@ public class NewlecCalculator implements Calculator {
 	@Override
 	public int div(int x, int y) {
 		// TODO Auto-generated method stub
-		return x/y;
+		int result = 0;
+		try {
+			result = x/y;
+		} catch (Exception e) {
+			System.out.println("에러 발생");
+		}
+		return result;
 	}
 
 }

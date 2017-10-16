@@ -22,6 +22,10 @@
 		SELECT * FROM NoticeView where id &gt; cast(#{id} as unsigned) order by regDate ASC limit 1
 	</select>
 	
+	<select id="getNextId" resultType="String">
+		select IFNULL(max(cast(id as unsigned)), 0)+1 from Notice
+	</select>
+	
 	<insert id="insert" parameterType="com.newlecture.webapp.entity.Notice">
 		<selectKey order="BEFORE" keyProperty="id" resultType="String" >
 			select IFNULL(max(cast(id as unsigned)), 0)+1 from Notice
@@ -30,7 +34,11 @@
 		values (#{id}, #{title}, #{content}, #{writerId})
 	</insert>
 	
-	<select id="getNextId" resultType="String">
-		select IFNULL(max(cast(id as unsigned)), 0)+1 from Notice
-	</select>
+	<update id="update" parameterType="com.newlecture.webapp.entity.Notice">
+		update Notice set title=#{title}, content=#{content} where id=#{id}
+	</update>
+
+	<delete id="delete" parameterType="String">
+		delete from Notice where id=#{id}
+	</delete>
 </mapper>
