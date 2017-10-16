@@ -499,7 +499,7 @@ window.addEventListener("load", function() {
 			if(xhr.readyState == 4)
 				data = eval(xhr.responseText);//문자열로 온 것을 표현식으로 실행
 		};
-		xhr.open("GET","../../customer/notice-ajax", true); // 데이터를 요청하기 위한 설정
+		xhr.open("GET","../../customer/notice-ajax", true); // 데이터를 요청하기 위한 설정 // 세번째 파라메터 -> 비동기(true) or 동기(false) 설정
 		xhr.send(); // 요청
 		
 		
