@@ -493,8 +493,23 @@ window.addEventListener("load", function() {
 	
 	
 	ajaxButton.onclick = function(e) {
-		var xhr = new XmlHttpRequest();
+		/* 2. 비동기형으로 문서를 요청한 방식 */
+		var xhr = new XMLHttpRequest(); // XML을 HTTP으로 요청을 보내고 응답을 받을 수 있는 도구
+		xhr.onreadystatechange = function(e) {// 안쪽 e 우선시 됨
+			if(xhr.readyState == 4)
+				data = eval(xhr.responseText);//문자열로 온 것을 표현식으로 실행
+		};
+		xhr.open("GET","../../customer/notice-ajax", true); // 데이터를 요청하기 위한 설정
+		xhr.send(); // 요청
 		
+		
+		
+		/* 동기형으로 문서를 요청한 방식 */
+		/* var xhr = new XMLHttpRequest(); // XML을 HTTP으로 요청을 보내고 응답을 받을 수 있는 도구
+		xhr.open("GET","../../customer/notice-ajax", false); // 데이터를 요청하기 위한 설정
+		xhr.send(); // 요청
+		data = eval(xhr.responseText);//문자열로 온 것을 표현식으로 실행
+		//data = xhr.responseText; undefine으로 도배됨 */
 	}
 	
 	cloneButton.onclick = function(e){
