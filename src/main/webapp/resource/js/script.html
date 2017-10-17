@@ -484,6 +484,7 @@ window.addEventListener("load", function() {
 	var tbody = document.querySelector('#ex2-clone tbody');
 	var template = document.querySelector('#ex2-clone template');
 	var ajaxButton = document.querySelector('#ex2-clone input[value="AJAX요청"]');
+	var container = document.querySelector('#ex2-clone div:first-child');
 	var data = [
 		{id:"1", title:"test", writerId:"ttt"},
 		{id:"2", title:"test222", writerId:"ttt"},
@@ -495,13 +496,30 @@ window.addEventListener("load", function() {
 	ajaxButton.onclick = function(e) {
 		/* 2. 비동기형으로 문서를 요청한 방식 */
 		var xhr = new XMLHttpRequest(); // XML을 HTTP으로 요청을 보내고 응답을 받을 수 있는 도구
-		xhr.onreadystatechange = function(e) {// 안쪽 e 우선시 됨
+		/* xhr.onreadystatechange = function(e) {// 안쪽 e 우선시 됨
 			if(xhr.readyState == 4)
 				data = eval(xhr.responseText);//문자열로 온 것을 표현식으로 실행
+		}; */
+		xhr.onload = function() {
+			//data = eval(xhr.responseText);
+			data = JSON.parse(xhr.responseText);
+			// 2. ajax icon 제거
+			container.removeChild(ajaxButton.parentNode.lastElementChild);
+//			ajaxButton.parentNode.removeChild(ajaxButton.parentNode.lastElementChild);
+		};
+		
+		xhr.onerror = function() {
+			alert("예기치 못한 오류가 발생하였습니다.");	
 		};
 		xhr.open("GET","../../customer/notice-ajax", true); // 데이터를 요청하기 위한 설정 // 세번째 파라메터 -> 비동기(true) or 동기(false) 설정
 		xhr.send(); // 요청
 		
+		//1. ajax icon 추가
+		var img = document.createElement('img');
+		img.src = "../images/ajax-loader.gif";
+		
+		container.appendChild(img);
+		//ajaxButton.parentNode.appendChild(img);
 		
 		
 		/* 동기형으로 문서를 요청한 방식 */
@@ -642,6 +660,7 @@ window.addEventListener("load", function() {
 	<form>
 		<input type="text" name="title" /><br /> <input type="submit"
 			value="전송" /><br /> <a href="">취소</a>
+			
 	</form>
 
 	<!--노드 바꾸기2 + 이벤트 심화 : 버블링과 캡처링 예제 -->
