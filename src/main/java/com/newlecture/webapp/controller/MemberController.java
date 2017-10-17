@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/*")
-public class HomeController {
+@RequestMapping("/member/*")
+public class MemberController {
 	
-	@RequestMapping("index")
-	public String index() {
-		return "home.index";
+	@RequestMapping(value="login", method=RequestMethod.GET)
+	public String login() {
+		return "member.login";
 	}
 
 }
