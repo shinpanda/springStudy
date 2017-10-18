@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -178,8 +180,8 @@ window.onload = function(){
 		}
 	}
 };
-   
-   <!--  open a window 예제 -->
+/*  */   
+<!--  open a window 예제 -->
    
 window.onload = function(){
 	var openButton=document.getElementById("open-button");
@@ -602,9 +604,8 @@ window.addEventListener("load", function() {
 <body>
 	<!-- Ajax로 파일 전송하기와 트리거 -->
 	<div id="ex3-upload">
-		<form action="../../upload" method="post" enctype="multipart/form-data">
+		<form action="../../upload?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
 			<div>
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<input type="submit" value="전송" />
 			</div>
 			<div id="clone-container">
