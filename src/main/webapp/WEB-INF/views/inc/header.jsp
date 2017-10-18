@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-
+<%-- <security:authentication property=""/> --%>
 <header id="header">
 	<div>
 		<img class="hamburger-button"
@@ -50,15 +51,33 @@
 					<h1 class="hidden">회원메뉴</h1>
 					<ul>
 						<li><a href="${ctx}/index">HOME</a></li>
-
-						<c:if test="${empty pageContext.request.userPrincipal}">
+						<security:authorize access="!hasRole('ROLE_USER')"><!-- 액세스할 대상 선별 가능 -->
+							<li><a href="${ctx}/member/login">로그인</a></li>
+						</security:authorize>
+						<security:authorize access="hasRole('ROLE_USER')"><!-- 액세스할 대상 선별 가능 -->
+							<li>
+								<%-- <c:url var="logout" value="/logout"/>
+								<form action="${logout}" method="post"> --%>
+								<!-- <form action="<c:url var="logout" value="/logout"/>" method="post"> -->
+								<form action="${ctx}/logout" method="post">
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+									<input type="submit" value="로그아웃" />
+								</form>
+							
+							<%-- <a href="${ctx}/member/login?logout"> --%>
+							<%-- <a href="${ctx}/logout">
+									<security:authentication property="name"/>님 로그아웃
+							</a> --%></li>
+						</security:authorize>
+						
+						<%-- <c:if test="${empty pageContext.request.userPrincipal}">
 							<li><a href="${ctx}/member/login">로그인</a></li>
 						</c:if>
 						<c:if test="${not empty pageContext.request.userPrincipal}">
-							<li><a href="${ctx}/j_spring_security_logout"> <%-- ${pageContext.request.userPrincipal.name}님 로그아웃 --%>
-									<%-- <security:authentication property="name"/>님  --%>로그아웃
+							<li><a href="${ctx}/member/login?logout"> ${pageContext.request.userPrincipal.name}님 로그아웃
+									<security:authentication property="name"/>님 로그아웃
 							</a></li>
-						</c:if>
+						</c:if> --%>
 
 						<li><a href="${ctx}/member/agree">회원가입</a></li>
 					</ul>

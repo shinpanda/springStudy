@@ -15,14 +15,22 @@
 			default-target-url="/index"
 		/>
 		
+		<logout
+			logout-success-url="/index"
+		/>
+		
 	</http>
 	<authentication-manager>
 		<authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource"
+			users-by-username-query="select `id`, pwd `password`, 1 enabled from Member where id=?"
+			authorities-by-username-query="select id , 'ROLE_USER' authority from Member where id = ?"/>
+		
 			<!-- inmemory -->
-			<user-service>
+			<!-- <user-service>
 				<user name="newlec" password="111" authorities="ROLE_USER, ROLE_ADMIN"/>
 				<user name="dragon" password="111" authorities="ROLE_USER"/>
-			</user-service>		
+			</user-service>	 -->	
 		</authentication-provider>
 	</authentication-manager>
 </beans:beans>
