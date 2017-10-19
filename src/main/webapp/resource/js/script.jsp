@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -599,12 +599,30 @@ window.addEventListener("load", function() {
 		*/
 	}
 });
+
+window.addEventListener("load", function() {
+	var submitButton = document.querySelector('#ex3-upload span');
+	var file = document.querySelector('#ex3-upload input[type="file"]');
+	
+	submitButton.onclick = function(e) {
+		var event = new MouseEvent("click", {
+			'view' : window,
+			'bubbles' : true,
+			'cancelable' : true
+		});
+		file.dispatchEvent(event);
+	};
+} );
+
 </script>
 </head>
 <body>
 	<!-- Ajax로 파일 전송하기와 트리거 -->
 	<div id="ex3-upload">
-		<form action="../../upload?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+		<input type="file" style="display:none;" />
+		<span style="border:1px solid #999; border-radius:5px; background:pink; padding:5px; cursor:pointer; font-size:14px">파일선택</span>
+		<%-- <form action="../../upload?${_csrf.parameterName}=${_csrf.token}"
+			method="post" enctype="multipart/form-data">
 			<div>
 				<input type="submit" value="전송" />
 			</div>
@@ -617,12 +635,12 @@ window.addEventListener("load", function() {
 						</tr>
 						<tr>
 							<td>파일</td>
-							<td><input type="file" name="file"/></td>
+							<td><input type="file" name="file" /></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-		</form>
+		</form> --%>
 	</div>
 	<hr />
 	<!-- Template 태그를 이용한 노드복제 예제 && Ajax 요청 예제-->

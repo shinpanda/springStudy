@@ -28,7 +28,7 @@ public class SpringNoticeDao implements NoticeDao {
 
 		//List<NoticeView> list = template.queryForList(sql, new Object[] { index }, NoticeView.class);
 		
-		//List<NoticeView> list = template.queryForList(sql, new Object[] {String.format("%%%s%%", query), index}, NoticeView.class);
+		//List<NoticeView> list = template.queryForList(sql, new Object[] {String.format("%%%s%%", query), index}, NoticeView.class); -> 단순 자료형일 때 사용가능
 		
 		List<NoticeView> list = template.query(sql, new Object[] {String.format("%%%s%%", query), index }, BeanPropertyRowMapper.newInstance(NoticeView.class));
 		//List<NoticeView> list = template.query(sql, new Object[] {"%"+query+"%", index }, BeanPropertyRowMapper.newInstance(NoticeView.class));
