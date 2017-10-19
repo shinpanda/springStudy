@@ -35,7 +35,7 @@ public class CustomerController {
 		
 		
 		model.addAttribute("list", noticeDao.getList(page, field, query));
-		
+		model.addAttribute("count", noticeDao.getCount());
 		/*String output = String.format("p:%s, q:%s", page, query);
 		output += String.format("title : %s\n", list.get(0).getTitle());
 		*/

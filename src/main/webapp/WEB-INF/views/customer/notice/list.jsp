@@ -60,7 +60,7 @@
 					</tbody>
 				</table>
 			</div>
-			
+			전체 글 수 : ${count}
 			<div class="indexer margin-top align-right">
 				<h3 class="hidden">현재 페이지</h3>
 				<div><span class="text-orange text-strong">1</span> / 3 pages</div>
