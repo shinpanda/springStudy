@@ -39,7 +39,7 @@ public class HomeController {
 
 			ServletContext ctx = request.getServletContext();
 			String path = ctx.getRealPath("/resource/upload");
-
+			System.out.println(path);
 			String fileName = file.getOriginalFilename();
 			path += File.separator + fileName;
 			File f = new File(path);

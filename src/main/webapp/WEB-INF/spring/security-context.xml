@@ -5,9 +5,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 	<http><!-- auto-config="true" -->
-		<intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/student/*" access="hasRole('ROLE_STUDENT')" />
-		<intercept-url pattern="/teacher/*" access="hasRole('ROLE_TEACHER')" />
+		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')" />
+		<intercept-url pattern="/student/**" access="hasRole('ROLE_STUDENT')" />
+		<intercept-url pattern="/teacher/**" access="hasRole('ROLE_TEACHER')" />
 		<!-- <intercept-url pattern="/customer/*" access="hasRole('ROLE_USER')" /> -->
 		
 		<form-login 

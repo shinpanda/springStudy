@@ -602,7 +602,7 @@ window.addEventListener("load", function() {
 
 window.addEventListener("load", function() {
 	var submitButton = document.querySelector('#ex3-upload span');
-	var file = document.querySelector('#ex3-upload input[type="file"]');
+	var fileInput = document.querySelector('#ex3-upload input[type="file"]');
 	
 	submitButton.onclick = function(e) {
 		var event = new MouseEvent("click", {
@@ -610,7 +610,41 @@ window.addEventListener("load", function() {
 			'bubbles' : true,
 			'cancelable' : true
 		});
-		file.dispatchEvent(event);
+		console.log("bf");
+		fileInput.dispatchEvent(event);
+		console.log("af");
+		fileInput.onchange = function() {
+			var file = fileInput.files[0];
+			
+			var formData = new FormData();
+			formData.append("title", "테스트");
+			formData.append("file", file);
+			
+			var xhr = new XMLHttpRequest(); // XML을 HTTP으로 요청을 보내고 응답을 받을 수 있는 도구
+			xhr.upload.onprogress = function(e) {
+				if(e.lengthComputable){
+					console.log("progress"+Math.floor(e.loaded / e.total*100)+"%");	
+				}
+			};
+			
+			xhr.upload.onloadend = function(e) {
+				console.log("end"+e.loaded);
+				
+			}
+			
+			xhr.upload.onload = function(e) {
+			};
+			
+			xhr.onerror = function(e) {
+				alert("예기치 못한 오류가 발생하였습니다.");	
+			};
+			xhr.open("POST","../../upload?${_csrf.parameterName}=${_csrf.token}", true); // 데이터를 요청하기 위한 설정 // 세번째 파라메터 -> 비동기(true) or 동기(false) 설정
+			xhr.send(formData);
+			
+			/* 
+			for(var key in file.files[0])
+				alert(key);			 */
+		};
 	};
 } );
 

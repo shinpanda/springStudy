@@ -14,7 +14,7 @@ public interface NoticeDao {
 	int getCount();
 	@Select("select * from NoticeView where id=#{id}")
 	NoticeView get(String id);
-	int update(String id, String title, String content, String fileName);
+	int update(String id, String title, String content);
 	NoticeView getPrev(String id);
 	NoticeView getNext(String id);
 	int insert(String title, String content, String writerId);

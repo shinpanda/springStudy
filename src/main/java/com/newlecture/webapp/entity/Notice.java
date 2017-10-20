@@ -19,6 +19,8 @@ public class Notice {
 		this.content = content;
 		this.writerId = writerId;
 	}
+	
+	
 	public Notice(String id, String title, String content, String writerId, Date regDate, int hit, String fileName) {
 		super();
 		this.id = id;

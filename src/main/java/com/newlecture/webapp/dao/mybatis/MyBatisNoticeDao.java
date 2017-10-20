@@ -35,7 +35,7 @@ public class MyBatisNoticeDao implements NoticeDao {
 	}
 
 	@Override
-	public int update(String id, String title, String content, String fileName) {
+	public int update(String id, String title, String content) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -73,5 +73,6 @@ public class MyBatisNoticeDao implements NoticeDao {
 		return noticeDao.getNextId();
 		
 	}
+
 
 }
