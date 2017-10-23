@@ -12,7 +12,7 @@ public class Program {
 	public static void main(String[] args) {
 		
 		
-		// Proxy¸¦ »ı¼ºÇØ¼­ ½ÇÁ¦ ÁÖ¾÷¹« ·ÎÁ÷À» À§ÀÓ.
+		// Proxyë¥¼ ìƒì„±í•´ì„œ ì‹¤ì œ ì£¼ì—…ë¬´ ë¡œì§ì„ ìœ„ì„.
 		ApplicationContext context = new ClassPathXmlApplicationContext("com/newlecture/webapp/aop/spring/aop-context.xml");
 		
 		Calculator cal = (Calculator) context.getBean("cal");

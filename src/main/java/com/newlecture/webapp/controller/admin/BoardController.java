@@ -86,7 +86,7 @@ public class BoardController {
 	public String noticeEdit(String id, String title, String content, String aa, MultipartFile[] file) {
 
 		int row = 0;
-		//notice.setWriterId("newlec");
+		
 		//row = noticeDao.update(notice.getId(), notice.getTitle(), notice.getContent());
 		row = noticeDao.update(id, title, content);
 		
@@ -112,11 +112,12 @@ public class BoardController {
 		int row = 0;
 		// String writerId = "newlec";
 		notice.setWriterId("newlec");
-
+		
+		// 업무명
 		// row = noticeDao.insert(title, content, writerId);
 		// row = noticeDao.insert(new Notice(title, content, writerId));
 		row = noticeDao.insert(notice);
-		memberDao.pointUp(principal.getName());
+		/*memberDao.pointUp(principal.getName());*/
 		
 
 		System.out.println(file.length);
@@ -126,16 +127,16 @@ public class BoardController {
 			if (!ff.isEmpty()) {
 				// System.out.println(file.length);
 				// for(int i=0; i<file.length; i++) {
-				// ��¥ ��� ���1
+				// 날짜 얻는 방법1
 				Date curDate = new Date();
 				// curDate.getYear()
 
-				// ��¥ ��� ���2
+				// 날짜 얻는 방법2
 				Calendar cal = Calendar.getInstance();
 				int year = cal.get(Calendar.YEAR);
 
 				/*
-				 * // ��¥ ��� ���3 SimpleDateFormat fmt = new SimpleDateFormat("YYYY"); String
+				 * // 날짜 얻는 방법3 SimpleDateFormat fmt = new SimpleDateFormat("YYYY"); String
 				 * year2 = fmt.format(curDate);
 				 */
 
@@ -145,8 +146,8 @@ public class BoardController {
 				File f = new File(path); // ����
 
 				if (!f.exists()) {
-					if (!f.mkdirs()) // true, false ��ȯ
-						System.out.println("���丮�� ������ �� �����ϴ�.");
+					if (!f.mkdirs()) // true, false 반환
+						System.out.println("디렉토리를 생성할 수 없습니다.");
 				}
 
 				// String fileName= file[i].getOriginalFilename();

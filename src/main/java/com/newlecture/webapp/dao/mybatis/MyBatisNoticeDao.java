@@ -16,8 +16,8 @@ public class MyBatisNoticeDao implements NoticeDao {
 	
 	@Override
 	public List<NoticeView> getList(int page,String field, String query) {
-		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class); //¸ÅÆÛ °´Ã¼
-		List<NoticeView> list = noticeDao.getList(page, field, query); // xml¿¡ ±¸ÇöµÈ getList ¸Ş¼Òµå¸¦ °¡Á®¿À´Â °Í.
+		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class); // ë§¤í•‘ê°ì²´ êµ¬í˜„
+		List<NoticeView> list = noticeDao.getList(page, field, query); // xmlì— êµ¬í˜„ëœ getListë¥¼ listì— ë‹´ëŠ” ê²ƒ.
 		return list;
 	}
 

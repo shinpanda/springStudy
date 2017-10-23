@@ -14,8 +14,8 @@ public class MyBatisNoticeFileDao implements NoticeFileDao {
 
 	@Override
 	public List<NoticeFile> getListByNoticeId(String noticeId) {
-		NoticeFileDao noticeFileDao = sqlSession.getMapper(NoticeFileDao.class); //¸ÅÆÛ °´Ã¼
-		List<NoticeFile> list = noticeFileDao.getListByNoticeId(noticeId); // xml¿¡ ±¸ÇöµÈ getList ¸Ş¼Òµå¸¦ °¡Á®¿À´Â °Í.
+		NoticeFileDao noticeFileDao = sqlSession.getMapper(NoticeFileDao.class); //ë§¤í•‘ê°ì²´ êµ¬í˜„
+		List<NoticeFile> list = noticeFileDao.getListByNoticeId(noticeId); // xmlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ getList ï¿½Ş¼Òµå¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
 		return list;
 	}
 

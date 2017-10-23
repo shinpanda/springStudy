@@ -8,22 +8,21 @@ public class Program {
 
 	public static void main(String[] args) {
 		Calculator origin = new NewlecCalculator();
-		
-		
-		// Proxy¸¦ »ı¼ºÇØ¼­ ½ÇÁ¦ ÁÖ¾÷¹« ·ÎÁ÷À» À§ÀÓ.
-		Calculator cal = (Calculator) Proxy.newProxyInstance(NewlecCalculator.class.getClassLoader(), new Class[] { Calculator.class}, new InvocationHandler() {
-			// ÇÁ·Ï½Ã ÀÎ½ºÅÏ½º¿¡¼­ ¸Ş¼­µå È£ÃâÀ» Ã³¸®ÇÏ°í °á°ú¸¦ ¹İÈ¯.
-			@Override
-			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-				System.out.println("»çÀüÃ³¸® º¸Á¶ ¾÷¹«"); //À§¿¡ Ã³¸®ÇÒ °Ô ÀÖÀ½ ¿©±â¼­
-				Object result = method.invoke(origin, args);
-				//¹Ø¿¡¼­ Ã³¸®ÇÒ °Ô ÀÖÀ¸¸é ¿©±â¼­
-				return result;
-			}
-		});
-		
-		
+		// Proxyë¥¼ ìƒì„±í•´ì„œ ì‹¤ì œ ì£¼ì—…ë¬´ ë¡œì§ì„ ìœ„ì„.
+		Calculator cal = (Calculator) Proxy.newProxyInstance(NewlecCalculator.class.getClassLoader(),
+				new Class[] { Calculator.class }, new InvocationHandler() {
+
+					@Override
+					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
+						System.out.println("ì‚¬ì „ì²˜ë¦¬ ë³´ì¡° ì—…ë¬´"); // ìœ„ì— ì²˜ë¦¬í•  ê²Œ ìˆìŒ ì—¬ê¸°ì„œ
+						Object result = method.invoke(origin, args);
+						// ë°‘ì—ì„œ ì²˜ë¦¬í•  ê²Œ ìˆìœ¼ë©´ ì—¬ê¸°ì„œ
+						return result;
+					}
+				});
+
 		int data = cal.add(3, 4);
 		System.out.println(data);
 

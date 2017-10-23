@@ -180,7 +180,7 @@ window.onload = function(){
 		}
 	}
 };
-/*  */   
+
 <!--  open a window 예제 -->
    
 window.onload = function(){
@@ -603,7 +603,9 @@ window.addEventListener("load", function() {
 window.addEventListener("load", function() {
 	var submitButton = document.querySelector('#ex3-upload span');
 	var fileInput = document.querySelector('#ex3-upload input[type="file"]');
-	
+	var progressBar = document.querySelector('#ex3-upload #progress-bar');
+	progressBar.style.width = "0px";
+
 	submitButton.onclick = function(e) {
 		var event = new MouseEvent("click", {
 			'view' : window,
@@ -623,12 +625,18 @@ window.addEventListener("load", function() {
 			var xhr = new XMLHttpRequest(); // XML을 HTTP으로 요청을 보내고 응답을 받을 수 있는 도구
 			xhr.upload.onprogress = function(e) {
 				if(e.lengthComputable){
-					console.log("progress"+Math.floor(e.loaded / e.total*100)+"%");	
+					console.log("progress : "+Math.round(e.loaded / e.total*100)+"%");  //반올림
+					var percentage =  Math.round(e.loaded / e.total*100);
+					progressBar.textContent = percentage+"%";
+					progressBar.style.width = percentage +"px";
+					
+					//console.log("progress : "+Math.floor(e.loaded / e.total*100)+"%"); //올림
 				}
 			};
 			
 			xhr.upload.onloadend = function(e) {
 				console.log("end"+e.loaded);
+				//progressBar.textContent = "";
 				
 			}
 			
@@ -655,6 +663,8 @@ window.addEventListener("load", function() {
 	<div id="ex3-upload">
 		<input type="file" style="display:none;" />
 		<span style="border:1px solid #999; border-radius:5px; background:pink; padding:5px; cursor:pointer; font-size:14px">파일선택</span>
+		<span id="progress-bar" style="background:aqua; display:inline-block"></span>
+		
 		<%-- <form action="../../upload?${_csrf.parameterName}=${_csrf.token}"
 			method="post" enctype="multipart/form-data">
 			<div>

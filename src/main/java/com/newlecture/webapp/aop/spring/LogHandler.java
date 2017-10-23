@@ -9,18 +9,18 @@ public class LogHandler implements MethodInterceptor {
 	@Override
 	public Object invoke(MethodInvocation method) throws Throwable {
 		
-		//System.out.println("½ºÇÁ¸µ »çÀü º¸Á¶ ¾÷¹«");
-		StopWatch watch = new StopWatch();
-		
-		watch.start();
-		Object result = method.proceed();
-		watch.stop();
-		
-		long du = watch.getTotalTimeMillis();
-		
-		System.out.println(method.getMethod().getName() +"() È£Ãâ¿¡ "+ du + "¹Ğ¸®ÃÊ°¡ °É·È½À´Ï´Ù");
-		//System.out.println("½ºÇÁ¸µ »çÈÄ º¸Á¶ ¾÷¹«");
-		
+		//System.out.println("ìŠ¤í”„ë§ ì‚¬ì „ ë³´ì¡° ì—…ë¬´");
+ 		StopWatch watch = new StopWatch();
+ 		
+ 		watch.start();
+  		Object result = method.proceed();
+
+ 		watch.stop();
+ 		
+ 		long du = watch.getTotalTimeMillis();
+ 		
+ 		System.out.println(method.getMethod().getName() +"() í˜¸ì¶œì— "+ du + "ë°€ë¦¬ì´ˆê°€ ê±¸ë ¸ìŠµë‹ˆë‹¤");
+ 		//System.out.println("ìŠ¤í”„ë§ ì‚¬í›„ ë³´ì¡° ì—…ë¬´");
 		
 		return result;
 	}
