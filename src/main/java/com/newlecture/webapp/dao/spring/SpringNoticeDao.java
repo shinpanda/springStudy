@@ -16,6 +16,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
@@ -37,8 +38,8 @@ public class SpringNoticeDao implements NoticeDao {
 	 */
 
 	// Transaction 처리 방법 2
-	@Autowired
-	private TransactionTemplate transactionTemplate;
+	/*@Autowired
+	private TransactionTemplate transactionTemplate;*/
 	/*
 	 * @Autowired //고정된 약속 public void setTemplate(JdbcTemplate template) {
 	 * this.template = template; }
@@ -156,8 +157,9 @@ public class SpringNoticeDao implements NoticeDao {
 		return insert(new Notice(title, content, writerId));
 	}
 
-	
+	//Transaction 처리 방법 3과 4번(@Transactional)
 	@Override
+	//@Transactional
 	public int insert(Notice notice) {
 		String sql = "insert into Notice(id, title, content, writerId) values (?, ?, ?, ?)";
 		String sql1 = "update Member set point = point + 1 where id=?";

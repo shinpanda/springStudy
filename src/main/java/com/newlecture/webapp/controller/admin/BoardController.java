@@ -30,11 +30,12 @@ import com.newlecture.webapp.dao.NoticeDao;
 import com.newlecture.webapp.dao.NoticeFileDao;
 import com.newlecture.webapp.entity.Notice;
 import com.newlecture.webapp.entity.NoticeFile;
+import com.newlecture.webapp.service.admin.BoardService;
 
 @Controller
 @RequestMapping("/admin/board/*")
 public class BoardController {
-
+/*
 	@Autowired
 	private NoticeDao noticeDao;
 
@@ -42,32 +43,58 @@ public class BoardController {
 	private NoticeFileDao noticeFileDao;
 	
 	@Autowired
-	private MemberDao memberDao;
+	private MemberDao memberDao;*/
+	
+	@Autowired
+	private BoardService service;
 
 	@RequestMapping("notice")
 	public String notice(@RequestParam(value = "p", defaultValue = "1") Integer page,
 			@RequestParam(value = "f", defaultValue = "title") String field,
 			@RequestParam(value = "q", defaultValue = "") String query, Model model) {
 
-		model.addAttribute("list", noticeDao.getList(page, field, query));
-
+		//model.addAttribute("list", noticeDao.getList(page, field, query));
+		//model.addAttribute("list", service.getNoticeList(page, field, query));
+		model.addAttribute("list", service.getNoticeList());
 		return "admin.board.notice.list";
 	}
+	@RequestMapping("notice")
+	public String notice(Model model) {
+
+		//model.addAttribute("list", noticeDao.getList(page, field, query));
+		//model.addAttribute("list", service.getNoticeList(page, field, query));
+		model.addAttribute("list", service.getNoticeList());
+		return "admin.board.notice.list";
+	}
+	@RequestMapping("notice")
+	public String notice(@RequestParam(value = "f", defaultValue = "title") String field,
+			@RequestParam(value = "q", defaultValue = "") String query, Model model) {
+
+		//model.addAttribute("list", noticeDao.getList(page, field, query));
+		//model.addAttribute("list", service.getNoticeList(page, field, query));
+		model.addAttribute("list", service.getNoticeList());
+		return "admin.board.notice.list";
+	}
+
 
 	@RequestMapping("notice/{id}")
 	public String noticeDetail(@PathVariable("id") String id, Model model) {
 
-		model.addAttribute("n", noticeDao.get(id));
+/*		model.addAttribute("n", noticeDao.get(id));
 		model.addAttribute("prev", noticeDao.getPrev(id));
 		model.addAttribute("next", noticeDao.getNext(id));
+*/
+		model.addAttribute("n", service.getNotice(id));
+		model.addAttribute("prev", service.getNoticePrev(id));
+		model.addAttribute("next", service.getNoticeNext(id));
 
 		return "admin.board.notice.detail";
 	}
 
 	@RequestMapping(value = "notice/edit", method = RequestMethod.GET)
 	public String noticeEdit(@RequestParam(value = "id", defaultValue = "1") String id, Model model) {
-		model.addAttribute("n", noticeDao.get(id));
-
+		//model.addAttribute("n", noticeDao.get(id));
+		model.addAttribute("n", service.getNotice(id)); 
 		return "admin.board.notice.edit";
 	}
 
@@ -88,7 +115,8 @@ public class BoardController {
 		int row = 0;
 		
 		//row = noticeDao.update(notice.getId(), notice.getTitle(), notice.getContent());
-		row = noticeDao.update(id, title, content);
+		//row = noticeDao.update(id, title, content);
+		row = service.update(id, title, content);
 		
 		return "redirect: ../notice";
 	}
@@ -107,7 +135,9 @@ public class BoardController {
 										 */) throws IOException {
 		// title = new String(title.getBytes("ISO-8859-1"), "UTF-8"); -> ���Ϳ��� ó��
 
-		String nextId = noticeDao.getNextId();
+		//String nextId = noticeDao.getNextId();
+		String nextId = service.getNoticeNextId();
+		
 		// System.out.println("NextId: "+ nextId);
 		int row = 0;
 		// String writerId = "newlec";
@@ -116,7 +146,9 @@ public class BoardController {
 		// 업무명
 		// row = noticeDao.insert(title, content, writerId);
 		// row = noticeDao.insert(new Notice(title, content, writerId));
-		row = noticeDao.insert(notice);
+		//row = noticeDao.insert(notice);
+		row = service.insertAndPointUp(notice);
+		
 		/*memberDao.pointUp(principal.getName());*/
 		
 
@@ -168,7 +200,8 @@ public class BoardController {
 
 				fis.close();
 				fos.close();
-				int row2 = noticeFileDao.insert(new NoticeFile(null, fileName, nextId));
+				//int row2 = noticeFileDao.insert(new NoticeFile(null, fileName, nextId));
+				int row2 = service.insertFile(new NoticeFile(null, fileName, nextId));
 			}
 		}
 
