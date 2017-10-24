@@ -24,13 +24,13 @@ public class BoardService {
 	@Autowired
 	private MemberDao memberDao;
 	
-	public List<NoticeView> getNoticeList() {
+/*	public List<NoticeView> getNoticeList() {
 		return getNoticeList(1, "title", "");
 	}
 	
 	public List<NoticeView> getNoticeList(String field, String query) {
 		return getNoticeList(1, field, query);
-	}
+	}*/
 	
 	public List<NoticeView> getNoticeList(int page, String field, String query) {
 		return noticeDao.getList(page, field, query);

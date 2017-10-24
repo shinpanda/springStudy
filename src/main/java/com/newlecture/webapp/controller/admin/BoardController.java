@@ -54,11 +54,11 @@ public class BoardController {
 			@RequestParam(value = "q", defaultValue = "") String query, Model model) {
 
 		//model.addAttribute("list", noticeDao.getList(page, field, query));
-		//model.addAttribute("list", service.getNoticeList(page, field, query));
-		model.addAttribute("list", service.getNoticeList());
+		model.addAttribute("list", service.getNoticeList(page, field, query));
+		//model.addAttribute("list", service.getNoticeList());
 		return "admin.board.notice.list";
 	}
-	@RequestMapping("notice")
+/*	@RequestMapping("notice")
 	public String notice(Model model) {
 
 		//model.addAttribute("list", noticeDao.getList(page, field, query));
@@ -72,9 +72,9 @@ public class BoardController {
 
 		//model.addAttribute("list", noticeDao.getList(page, field, query));
 		//model.addAttribute("list", service.getNoticeList(page, field, query));
-		model.addAttribute("list", service.getNoticeList());
+		model.addAttribute("list", service.getNoticeList(field, query));
 		return "admin.board.notice.list";
-	}
+	}*/
 
 
 	@RequestMapping("notice/{id}")

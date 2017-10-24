@@ -605,7 +605,24 @@ window.addEventListener("load", function() {
 	var fileInput = document.querySelector('#ex3-upload input[type="file"]');
 	var progressBar = document.querySelector('#ex3-upload #progress-bar');
 	progressBar.style.width = "0px";
-
+	
+	var fileViewer = document.querySelector("#ex3-upload ul");
+	
+	// 파일 목록 초기화
+	var xhr = new XMLHttpRequest();
+	xhr.onload = function(e){
+		//var files = JSON.parse(xhr.responseText);
+		var files = JSON.parse(e.target.responseText);
+		
+		for(var i=0; i<files.length; i++){
+			var li = document.createElement("li");
+			li.textContent = files[i];
+			fileViewer.appendChild(li);
+		}
+	};
+	xhr.open("GET", "../../file-list");
+	xhr.send();
+	
 	submitButton.onclick = function(e) {
 		var event = new MouseEvent("click", {
 			'view' : window,
@@ -659,12 +676,17 @@ window.addEventListener("load", function() {
 </script>
 </head>
 <body>
-	<!-- Ajax로 파일 전송하기와 트리거 -->
+	<!-- Ajax로 파일 전송하기와 트리거 그리고 파일목록뷰어 -->
 	<div id="ex3-upload">
 		<input type="file" style="display:none;" />
 		<span style="border:1px solid #999; border-radius:5px; background:pink; padding:5px; cursor:pointer; font-size:14px">파일선택</span>
 		<span id="progress-bar" style="background:aqua; display:inline-block"></span>
-		
+		<!-- 파일 목록 뷰어 -->
+		<div>
+			<ul>
+				
+			</ul>
+		</div>
 		<%-- <form action="../../upload?${_csrf.parameterName}=${_csrf.token}"
 			method="post" enctype="multipart/form-data">
 			<div>
