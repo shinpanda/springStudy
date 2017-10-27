@@ -200,7 +200,8 @@ window.onload = function(){
 	};   
 	transButton.onclick = function() {
 		//iframe.location.href="http://www.daum.net";
-		iframe.document.write("http://www.daum.net");
+		//iframe.document.write("http://www.daum.net");
+		win.location.href="http://www.daum.net";
 	};
 };
  
