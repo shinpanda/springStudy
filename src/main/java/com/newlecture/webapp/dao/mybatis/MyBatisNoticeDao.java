@@ -29,6 +29,7 @@ public class MyBatisNoticeDao implements NoticeDao {
 
 	@Override
 	public NoticeView get(String id) {
+
 		NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
 		NoticeView noticeView = noticeDao.get(id);
 		return noticeView;

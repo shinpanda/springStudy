@@ -61,7 +61,7 @@
 								<!-- <form action="<c:url var="logout" value="/logout"/>" method="post"> -->
 								<form action="${ctx}/logout" method="post">
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-									<input type="submit" value="로그아웃" />
+									<security:authentication property="name"/><input type="submit" value="로그아웃" />
 								</form>
 							
 							<%-- <a href="${ctx}/member/login?logout"> --%>

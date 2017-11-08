@@ -343,6 +343,77 @@ window.addEventListener("load", function() {
 
 	};
 });
+
+/* //!--노드 바꾸기 예제 2 -->
+window.addEventListener("load", function() {
+   var moveUpButton = document.querySelector("#move-up-button");
+   //var radioButton = document.
+   var container = document.querySelector("#move-up-container");
+   
+   var checkedId = 0;
+   
+   var tbody = container.querySelector("tbody");
+   //var td = tbody.querySelector("tr:first-child td:last-child");
+   var td = tbody.firstElementChild.lastElementChild;
+      var tr = null;
+   
+   td.addEventListener("click",function(e){
+      //e.stopPropagation();
+      
+      console.log("td");
+      e.target.style.background = "green";
+      
+      
+   },true);
+   
+   tbody.addEventListener("click", function(e){
+            
+      if(e.target.nodeName == "INPUT"){
+         
+         tr = e.target.parentNode.parentNode;
+            
+      
+      
+      //var oldNode = container.replaceChild(tr1, tr2);
+       //container.insertBefore(oldNode, tr3);
+      
+      }
+         
+      //console.log("tbody");
+      //alert("target : " + e.target.nodeName + ", current : " + e.currentTarget.nodeName);
+      //e.target.style.background = "pink";
+      //e.target.style.background = "pink";
+   }, true);
+      
+   /* var trs = container.querySelectorAll("tbody tr");
+   
+   for(var i=0; i<trs.length; i++)
+      trs[i].onclick = function(e){
+         e.target.style.background = "pink";
+      }; 
+   
+   moveUpButton.onclick = function() {
+                  
+         if(tr == null)
+            return;
+                  
+         var container = tr.parentNode;
+            
+            var bf = tr.previousElementSibling;
+         var af = tr.nextElementSibling;
+                  
+         if(bf == null)
+            bf = container.firstElementChild;
+         
+         container.replaceChild(tr, bf);      
+         
+         if(af == null)
+            container.appendChild(bf);
+         else
+            container.insertBefore(bf, af);
+   };
+}); 
+*/
 //!--노드 바꾸기2 예제 -->
 window.addEventListener("load", function() {
 	var moveUpNodeButton = document.querySelector("#move-up-node-button");
@@ -636,6 +707,7 @@ window.addEventListener("load", function() {
 		fileInput.onchange = function() {
 			var file = fileInput.files[0];
 			
+			console.log(file.name);
 			var formData = new FormData();
 			formData.append("title", "테스트");
 			formData.append("file", file);
