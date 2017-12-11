@@ -56,7 +56,7 @@
 			//animate(item, parseInt(item.parentNode.style.width));
 			//1. 변화를 주는 방법 from -> to
 			item.css({
-				width:"200px"
+				width:"0px"
 			}); 
 
 	//2. 기간(duration)을 두고 점진적으로 변화를 주는 방법

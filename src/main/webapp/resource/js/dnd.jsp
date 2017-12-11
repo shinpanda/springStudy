@@ -1,0 +1,111 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#drop-zone {
+	width: 500px;
+	height: 200px;
+	border: 1px solid lime;
+}
+</style>
+<script type="text/javascript">
+	window.addEventListener("load", function(event) {
+		var dropZone = document.querySelector("#drop-zone");
+		dropZone.addEventListener("dragenter", function(e) {
+			e.preventDefault(); 
+			e.stopPropagation();
+			
+			dropZone.style.background = "pink";
+			console.log("enter");
+		});
+		dropZone.addEventListener("dragover", function(e) {
+			e.preventDefault(); 
+			e.stopPropagation();
+			console.log("over");
+		});
+		dropZone.addEventListener("dragleave", function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			dropZone.style.background = "white";
+			console.log("leave");
+		});
+		
+		dropZone.addEventListener("drop", function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			
+			/* for(var key in e.dataTransfer.types[0])
+				console.log(key); // 속성명
+			
+			console.log(e.dataTransfer.types[0]);	
+			console.log(typeof e.dataTransfer.types[0]);	 */
+			/* for(var key in e)
+				console.log(key); // 속성명 */
+			console.log("drop");
+			//console.log(typeof e.dataTransfer.types[0]);
+			//var isValidate = (e.dataTransfer && e.dataTransfer.types && e.dataTransfer.types[0]=="Files");
+			var isValidate = e.dataTransfer && e.dataTransfer.types && e.dataTransfer.types[0].indexOf("Files") >= 0;
+			if(!isValidate){
+
+				alert("파일 형식이 올바르지 않습니다");
+				return;
+			}
+			//하나씩만 보낼 것이므로 개수 확인
+			var files = e.dataTransfer.files;
+			var count = files.length;
+			if(count > 1){
+				alert("파일은 하나씩 전송할 수 있습니다.");
+				return;
+			}	
+			
+			var size = files[0].size;
+			if(size > 300*1024*1024){
+				alert("죄송합니다. 300MB를 넘는 파일은 전송할 수 없습니다.");
+				return;
+			}
+			
+			// String ***
+			// key=value&key=value&key=value
+			
+			var formData = new FormData();
+			formData.append("file", files[0]);
+			
+			var xhr = new XMLHttpRequest();
+			/* xhr.upload.addEventListener("progress", function(evt) {
+				if(evt.lengthComputable){
+	                dropZone.textContent = "진척도 : " + Math.round(evt.loaded*100/evt.total)+"%";
+	             }
+			}) */
+			xhr.upload.addEventListener("progress", function(evt){
+				console.log("EVENT 확인");
+	             if(evt.lengthComputable){
+	                dropZone.textContent = "진척도 : " + Math.round(evt.loaded*100/evt.total)+"%";
+	             }
+	          });
+			
+			xhr.upload.addEventListener("load", function(evt) {
+				// 서버에 있는 파일 목록을 다시 가져와서
+				// 현재 페이지에 목록을 포함시켜야 한다.
+			});
+			
+			xhr.open("POST", "../../upload?${_csrf.parameterName}=${_csrf.token}");
+			xhr.send(formData);
+			//for(var key in files){ 파일 여러개일 경우
+				//console.log(key);
+				//FormData
+				//filesize : ...
+				//filename :....
+				//body: ...
+			//}
+		});
+	});
+</script>
+</head>
+<body>
+	<div id="drop-zone">test</div>
+</body>
+</html>

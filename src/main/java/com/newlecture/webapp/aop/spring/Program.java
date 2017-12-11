@@ -21,7 +21,7 @@ public class Program {
 		//data = cal.div(3, 0);
 		
 		System.out.println(data);
-
+		
 	}
 
 }

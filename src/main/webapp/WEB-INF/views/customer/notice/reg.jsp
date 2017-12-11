@@ -33,6 +33,7 @@
 				</tbody>
 			</table>
 			<div>
+				
 				<input type="submit" value="등록" />
 				<a href="notice">취소</a>				
 			</div>
